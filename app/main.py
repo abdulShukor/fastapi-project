@@ -3,6 +3,8 @@ from fastapi.params import Body
 from pydantic import BaseModel
 from typing import Optional
 from random import randrange
+import psycopg
+#from psycopg.extras import RealDictCursor
 
 app = FastAPI()
 
@@ -11,6 +13,16 @@ class Post(BaseModel):
     content: str
     published: bool = True
     rating: Optional[int] = None
+
+
+
+try:
+   conn = psycopg.connect(host='localhost', database='fastapi', user='postgres', password='admin')
+   cursor = conn.cursor()
+   print("Database connection was successfull!")
+except Exception as error:
+   print("Connecting to database failed")
+   print("Error", error)
 
 my_posts = [{"title": "title of post 1", "content": "content of post 1", "id": 1}, {"title": 
 "favorite foods", "content": "I like pizza", "id": 2}]
@@ -27,7 +39,7 @@ def find_index_post(id):
          return i
 
 @app.get("/")
-def root():
+def root(): #root where the API reside
     return {"message": "Welocome to my API!!"}
 
 @app.get("/posts")
@@ -61,7 +73,6 @@ def delete_post(id: int):
 @app.put("/posts/{id}")
 def update_post(id: int, post: Post):
    index = find_index_post(id)
-
    if index == None:
       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'post with id does not exist')
    
