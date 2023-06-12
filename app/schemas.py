@@ -12,6 +12,8 @@ class PostBase(BaseModel):
 class PostCreate(PostBase):
     pass
 
+# pythan execute code line by line, UerOut should be before the Post model to avoid error
+
 class UserOut(BaseModel):
    id: int
    email: EmailStr
