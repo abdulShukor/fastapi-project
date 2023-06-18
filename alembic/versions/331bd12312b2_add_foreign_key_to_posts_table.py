@@ -1,8 +1,8 @@
 """add foreign-key to posts table
 
-Revision ID: f46b18e64858
-Revises: a5a3fd1cd443
-Create Date: 2023-06-15 21:43:13.303587
+Revision ID: 331bd12312b2
+Revises: 0632f8852364
+Create Date: 2023-06-17 22:11:06.633444
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f46b18e64858'
-down_revision = 'a5a3fd1cd443'
+revision = '331bd12312b2'
+down_revision = '0632f8852364'
 branch_labels = None
 depends_on = None
 
